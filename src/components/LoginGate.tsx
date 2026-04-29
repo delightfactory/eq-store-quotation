@@ -13,7 +13,7 @@ export const LoginGate: React.FC<LoginGateProps> = ({ children }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  
+
   const usernameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -24,74 +24,89 @@ export const LoginGate: React.FC<LoginGateProps> = ({ children }) => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Note: This is a very simple hardcoded auth gate for the prototype/demo phase.
-    // It is not a secure backend authentication system.
+
+    // Note: simple hardcoded auth gate for prototype/demo phase – not a secure backend system.
     if (username.trim() === 'eqstore' && password === '500') {
       sessionStorage.setItem('eq_auth', 'true');
       setIsAuthenticated(true);
       setError('');
     } else {
       setError('بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.');
-      setPassword(''); // Clear password field on error
-      if (usernameRef.current) {
-        usernameRef.current.focus();
-      }
+      setPassword('');
+      if (usernameRef.current) usernameRef.current.focus();
     }
   };
 
   if (isChecking) {
     return (
       <div className="min-h-screen bg-bg-base flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gold-primary border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-2 border-cyan-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
-  if (isAuthenticated) {
-    return <>{children}</>;
-  }
+  if (isAuthenticated) return <>{children}</>;
 
   return (
-    <div className="min-h-screen bg-bg-base flex items-center justify-center p-4 relative overflow-hidden" dir="rtl">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <div
+      className="min-h-screen bg-bg-base command-grid flex items-center justify-center p-4 relative overflow-hidden"
+      dir="rtl"
+    >
+      {/* Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-primary/[0.05] blur-[140px] rounded-full pointer-events-none" aria-hidden="true" />
 
-      <GlassCard className="w-full max-w-md p-8 relative z-10 animate-fade-in-up">
+      {/* Secure Access Card */}
+      <GlassCard corners className="w-full max-w-md p-8 relative z-10 animate-fade-in-up">
+
+        {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 border border-white/10 mb-6">
-            <svg className="w-8 h-8 text-gold-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          {/* Lock icon */}
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-soft border border-cyan-primary/25 mb-6 cyan-glow">
+            <svg className="w-8 h-8 text-cyan-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          
-          <h1 className="text-2xl font-bold text-text-primary mb-2">تسجيل الدخول للعرض</h1>
-          <p className="text-sm text-text-secondary leading-relaxed">
-            هذا العرض يحتوي على بيانات تجارية وتسعيرية سرية. يرجى إدخال بيانات الدخول المعتمدة للوصول.
+
+          <h1 className="text-2xl font-bold text-text-primary mb-1">Secure Command Access</h1>
+          <p className="text-xs text-text-secondary leading-relaxed mt-2">
+            Confidential EQ Store Proposal — authorized personnel only.
           </p>
-          
-          <div className="mt-4 flex items-center justify-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent-warning animate-pulse"></span>
-            <span className="text-[10px] uppercase tracking-widest font-en text-accent-warning">Confidential Document</span>
+
+          {/* Status chips */}
+          <div className="mt-4 flex items-center justify-center gap-3 flex-wrap">
+            <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-en text-accent-warning px-2 py-1 bg-accent-warning/10 border border-accent-warning/20 rounded-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-warning status-pulse" />
+              Confidential Document
+            </span>
+            <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-en text-cyan-primary px-2 py-1 bg-cyan-soft border border-cyan-primary/20 rounded-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-primary status-pulse" />
+              Secure Session
+            </span>
           </div>
         </div>
 
+        {/* Form */}
         <form onSubmit={handleLogin} className="space-y-5">
           {error && (
-            <div className="p-3 bg-accent-negative/10 border border-accent-negative/20 rounded-lg text-accent-negative text-sm text-center font-medium animate-fade-in-up" style={{ animationDuration: '0.2s' }}>
+            <div
+              className="p-3 bg-accent-negative/10 border border-accent-negative/20 rounded-lg text-accent-negative text-sm text-center font-medium animate-fade-in-up"
+              style={{ animationDuration: '0.2s' }}
+            >
               {error}
             </div>
           )}
 
           <div className="space-y-1.5 text-right">
-            <label className="block text-xs font-semibold text-text-secondary pr-1" htmlFor="username">اسم المستخدم</label>
-            <input 
+            <label className="block text-xs font-semibold text-text-secondary pr-1" htmlFor="username">
+              اسم المستخدم
+            </label>
+            <input
               ref={usernameRef}
               id="username"
-              type="text" 
+              type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-gold-primary focus:ring-1 focus:ring-gold-primary transition-all font-en"
+              className="w-full bg-black/40 border border-cyan-primary/15 rounded-lg px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-cyan-primary/50 focus:ring-1 focus:ring-cyan-primary/30 transition-all font-en"
               placeholder="Username"
               dir="ltr"
               autoComplete="off"
@@ -99,29 +114,58 @@ export const LoginGate: React.FC<LoginGateProps> = ({ children }) => {
           </div>
 
           <div className="space-y-1.5 text-right">
-            <label className="block text-xs font-semibold text-text-secondary pr-1" htmlFor="password">كلمة المرور</label>
-            <input 
+            <label className="block text-xs font-semibold text-text-secondary pr-1" htmlFor="password">
+              كلمة المرور
+            </label>
+            <input
               id="password"
-              type="password" 
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-gold-primary focus:ring-1 focus:ring-gold-primary transition-all font-en tracking-widest"
+              className="w-full bg-black/40 border border-cyan-primary/15 rounded-lg px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-cyan-primary/50 focus:ring-1 focus:ring-cyan-primary/30 transition-all font-en tracking-widest"
               placeholder="••••••"
               dir="ltr"
             />
           </div>
 
-          <button 
+          <button
             type="submit"
-            className="w-full py-3.5 px-4 bg-gradient-to-r from-gold-primary to-gold-primary/80 hover:from-gold-primary/90 hover:to-gold-primary/70 text-bg-base font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] mt-2 focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 focus:ring-offset-bg-base"
+            className="w-full py-3.5 px-4 bg-gradient-to-r from-cyan-primary/90 to-cyan-secondary hover:from-cyan-primary hover:to-cyan-secondary/90 text-bg-base font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(0,212,255,0.18)] hover:shadow-[0_0_32px_rgba(0,212,255,0.32)] mt-2 focus:outline-none focus:ring-2 focus:ring-cyan-primary/60 focus:ring-offset-2 focus:ring-offset-bg-base"
           >
             عرض المستند
           </button>
         </form>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-1 border-t border-white/5 pt-6">
-          <span className="text-[10px] text-text-secondary uppercase tracking-widest font-en">Powered by Tech Edge</span>
-          <span className="text-xs font-bold text-text-primary">Delight Factory</span>
+        {/* Footer – Brand Logos */}
+        <div className="mt-8 border-t border-cyan-primary/10 pt-6 flex items-center justify-between gap-4">
+
+          {/* Left: Delight Factory */}
+          <div className="flex flex-col items-center gap-1.5">
+            <span className="text-[9px] text-text-muted uppercase tracking-widest font-en">Issued By</span>
+            <img
+              src="/delight-logo.png"
+              alt="Delight Factory"
+              className="h-8 object-contain"
+              style={{ filter: 'brightness(1.1)' }}
+            />
+            <span className="text-[10px] font-semibold text-text-secondary">Delight Factory</span>
+          </div>
+
+          {/* Divider */}
+          <div className="w-px h-12 bg-cyan-primary/15" />
+
+          {/* Right: Tech Edge */}
+          <div className="flex flex-col items-center gap-1.5">
+            <span className="text-[9px] text-text-muted uppercase tracking-widest font-en">Powered By</span>
+            <img
+              src="/techedge-logo.png"
+              alt="Tech Edge"
+              className="h-8 w-8 object-contain rounded-md"
+              style={{ filter: 'brightness(1.1)' }}
+            />
+            <span className="text-[10px] font-semibold text-cyan-primary/80 font-en">Tech Edge</span>
+          </div>
+
         </div>
       </GlassCard>
     </div>

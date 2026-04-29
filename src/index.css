@@ -5,20 +5,41 @@
   --font-english: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-bg-base: #0A0E13;
-  --color-bg-elevated: #111720;
-  --color-bg-overlay: #1C232E;
+  /* ── Command Center Background System ── */
+  --color-bg-base:    #060A10;
+  --color-bg-elevated: #0B111A;
+  --color-bg-panel:   #101824;
+  --color-bg-overlay: #162233;
 
-  --color-gold-primary: #C9A961;
+  /* ── Cyan / Industrial Accent ── */
+  --color-cyan-primary:   #00D4FF;
+  --color-cyan-secondary: #0090B3;
+  --color-cyan-soft:      rgba(0, 212, 255, 0.10);
+
+  /* ── Legacy aliases – preserve existing Tailwind class usage ── */
+  /* gold-primary kept for financial highlights only */
+  --color-gold-primary:   #C7A45D;
   --color-gold-secondary: #8B6F3D;
 
-  --color-text-primary: #E8E6E1;
-  --color-text-secondary: #9A9B9E;
+  /* accent-tech → cyan */
+  --color-accent-tech:     #00D4FF;
 
-  --color-accent-positive: #6B8E6F;
-  --color-accent-warning: #C9924A;
-  --color-accent-negative: #9C5141;
-  --color-accent-tech: #4A8B96;
+  /* accent-positive → calm neon green */
+  --color-accent-positive: #39D98A;
+
+  /* accent-warning → industrial orange */
+  --color-accent-warning:  #FFB347;
+
+  /* accent-negative → alert red */
+  --color-accent-negative: #FF5C5C;
+
+  /* neon green alias */
+  --color-neon-green: #39FF88;
+
+  /* ── Text ── */
+  --color-text-primary:   #EEF7FA;
+  --color-text-secondary: #9FB3BF;
+  --color-text-muted:     #5F7480;
 }
 
 @layer base {
@@ -26,12 +47,7 @@
     @apply bg-bg-base text-text-primary font-arabic antialiased overflow-x-hidden;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-arabic font-semibold;
   }
 
@@ -39,76 +55,204 @@
     @apply font-english font-medium;
   }
 
+  /* Numbers always display LTR inside RTL text */
   .font-mono-num {
     @apply font-mono font-semibold tracking-tight;
-    /* Ensure numbers display left-to-right correctly inside Arabic text */
     unicode-bidi: isolate;
     direction: ltr;
   }
 }
 
 @layer utilities {
+  /* ── HUD Panel – replaces classic glassmorphism ── */
+  .hud-panel {
+    background: linear-gradient(180deg, rgba(16, 24, 36, 0.96), rgba(8, 13, 22, 0.96));
+    border: 1px solid rgba(0, 212, 255, 0.14);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.35),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+  }
+
+  /* Legacy – map old glass classes to new hud style */
   .glass-panel {
-    background: rgba(28, 35, 46, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(180deg, rgba(16, 24, 36, 0.96), rgba(8, 13, 22, 0.96));
+    border: 1px solid rgba(0, 212, 255, 0.12);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.30),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   }
 
   .glass-panel-premium {
-    background: rgba(28, 35, 46, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(201, 169, 97, 0.4);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(201, 169, 97, 0.05);
+    background: linear-gradient(160deg, rgba(14, 22, 34, 0.98), rgba(8, 13, 22, 0.98));
+    border: 1px solid rgba(0, 212, 255, 0.22);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.50),
+      0 0 0 1px rgba(0, 212, 255, 0.06),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   }
 
-  .text-gradient-gold {
-    background: linear-gradient(135deg, var(--color-gold-primary) 0%, var(--color-gold-secondary) 100%);
+  /* ── Command Grid Background ── */
+  .command-grid {
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── HUD Corner Brackets (apply sparingly) ── */
+  .hud-corners {
+    position: relative;
+  }
+  .hud-corners::before,
+  .hud-corners::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+  }
+  .hud-corners::before {
+    top: 0;
+    right: 0;
+    border-top: 1px solid rgba(0, 212, 255, 0.55);
+    border-right: 1px solid rgba(0, 212, 255, 0.55);
+  }
+  .hud-corners::after {
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.35);
+    border-left: 1px solid rgba(0, 212, 255, 0.35);
+  }
+
+  /* ── Subtle Cyan Glow ── */
+  .cyan-glow {
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.16);
+  }
+
+  /* ── Command Divider Line ── */
+  .command-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.55), transparent);
+  }
+
+  /* ── Legacy divider (neutral white) ── */
+  .divider-neutral {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 212, 255, 0.25) 50%, transparent 100%);
+  }
+
+  /* ── Cyan text gradient ── */
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #00D4FF 0%, #0090B3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .divider-gold {
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(201, 169, 97, 0.3) 50%, transparent 100%);
+  /* ── Legacy gold gradient – kept for financial totals only ── */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #00D4FF 0%, #0090B3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+  /* ── Scrollbar helpers ── */
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.25);
+    border-radius: 2px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.45);
   }
 }
 
-/* Animations */
+/* ── Animations ── */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fade-in-up {
   animation: fadeInUp 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Print styles */
-@media print {
-  @page {
-    margin: 2cm;
-    size: A4;
+/* Subtle pulse for live indicators */
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.status-pulse { animation: statusPulse 2s ease-in-out infinite; }
+
+/* ── Card Shimmer Border Animation ── */
+@property --shimmer-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes shimmerRotate {
+  from { --shimmer-angle: 0deg; }
+  to   { --shimmer-angle: 360deg; }
+}
+
+/* Base: position:relative needed for the pseudo-element */
+.card-shimmer {
+  position: relative;
+}
+
+/*
+  The shimmer border is drawn by ::before using a masked conic-gradient.
+  inset: 0 keeps it INSIDE the card → works with overflow:hidden.
+  padding: 1.5px is the visible border strip width.
+  No z-index → renders naturally in DOM order (above card bg, below children).
+*/
+.card-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--shimmer-angle),
+    transparent   0%,
+    rgba(0,212,255,0.00) 28%,
+    rgba(0,212,255,0.90) 50%,
+    rgba(0,212,255,0.00) 72%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* Triggered by JS adding shimmer-active class on IntersectionObserver */
+.card-shimmer.shimmer-active::before {
+  opacity: 1;
+  animation: shimmerRotate 2.8s linear forwards;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Print Styles – clean enterprise output ── */
+@media print {
+  @page { margin: 2cm; size: A4; }
 
   body {
     @apply bg-white text-black;
@@ -121,36 +265,40 @@
     color: #111 !important;
   }
 
-  .text-gold-primary,
+  .text-cyan-primary,
+  .text-gradient-cyan,
+  .text-gradient-gold,
   .font-mono-num {
-    color: #7A5C2E !important;
+    background: none !important;
+    -webkit-text-fill-color: #1a4e6e !important;
+    color: #1a4e6e !important;
   }
 
-  .no-print {
-    display: none !important;
-  }
+  .text-gold-primary { color: #7A5C2E !important; }
+
+  .no-print { display: none !important; }
 
   .glass-panel,
-  .glass-panel-premium {
+  .glass-panel-premium,
+  .hud-panel {
     background: white !important;
     border: 1px solid #ccc !important;
     box-shadow: none !important;
     color: black !important;
   }
 
-  .text-text-secondary {
-    color: #555 !important;
+  /* Hide glow effects in print */
+  .cyan-glow,
+  .hud-corners::before,
+  .hud-corners::after,
+  .card-shimmer::before { display: none !important; }
+
+  .text-text-secondary { color: #555 !important; }
+
+  .divider-neutral,
+  .command-line {
+    background: #ccc !important;
   }
 
-  .text-gradient-gold {
-    background: none;
-    -webkit-text-fill-color: black;
-    color: black;
-  }
-
-  .print-page-break-inside-avoid {
-    page-break-inside: avoid;
-  }
-
-  /* Ensure header/footer repeats natively or hide dashboard chrome */
+  .print-page-break-inside-avoid { page-break-inside: avoid; }
 }

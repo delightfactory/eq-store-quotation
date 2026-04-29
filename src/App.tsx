@@ -15,11 +15,14 @@ import { LoginGate } from './components/LoginGate'
 function App() {
   return (
     <LoginGate>
-    <div className="min-h-screen bg-bg-base text-text-primary flex flex-col relative font-arabic selection:bg-gold-primary/30 selection:text-white">
-      {/* Abstract background elements */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden no-print">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-tech/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3"></div>
+    <div className="min-h-screen bg-bg-base text-text-primary flex flex-col relative font-arabic selection:bg-cyan-primary/20 selection:text-white">
+      {/* Command Grid Background */}
+      <div className="fixed inset-0 command-grid pointer-events-none z-0 no-print" aria-hidden="true" />
+
+      {/* Subtle ambient lighting – navy/cyan instead of heavy gold blobs */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden no-print" aria-hidden="true">
+        <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-cyan-primary/[0.04] rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-secondary/[0.04] rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3" />
       </div>
 
       <StickyTopBar />
