@@ -8,30 +8,19 @@ import { formatCurrency, formatNumber } from '../utils/formatters';
 export function useCardShimmer<T extends HTMLElement = HTMLDivElement>() {
   const ref = useRef<T>(null);
   const [active, setActive] = useState(false);
-  const hasRun = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    // Add shimmer while card is in viewport, remove when it leaves
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasRun.current) {
-          hasRun.current = true;
-          setActive(true);
-          timerRef.current = setTimeout(() => setActive(false), 3000);
-        }
-      },
+      ([entry]) => setActive(entry.isIntersecting),
       { threshold: 0.12 }
     );
 
     observer.observe(el);
-
-    return () => {
-      observer.disconnect();
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return {

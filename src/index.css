@@ -234,10 +234,10 @@
   pointer-events: none;
 }
 
-/* Triggered by JS adding shimmer-active class on IntersectionObserver */
+/* Triggered by JS: added when card enters viewport, removed on exit */
 .card-shimmer.shimmer-active::before {
   opacity: 1;
-  animation: shimmerRotate 2.8s linear forwards;
+  animation: shimmerRotate 2.8s linear infinite;
 }
 
 /* ── Reduced Motion ── */
