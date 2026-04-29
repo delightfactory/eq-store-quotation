@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  --font-arabic: 'Alexandria', sans-serif;
+  --font-english: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-bg-base: #0A0E13;
+  --color-bg-elevated: #141921;
+  --color-bg-overlay: #1C232E;
+
+  --color-gold-primary: #C9A961;
+  --color-gold-secondary: #8B6F3D;
+
+  --color-text-primary: #E8E6E1;
+  --color-text-secondary: #8A8B8E;
+
+  --color-accent-positive: #6B8E6F;
+  --color-accent-warning: #C9924A;
+  --color-accent-negative: #9C5141;
+  --color-accent-tech: #4A8B96;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-base text-text-primary font-arabic antialiased overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-arabic font-semibold;
+  }
+
+  .font-en {
+    @apply font-english font-medium;
+  }
+
+  .font-mono-num {
+    @apply font-mono font-semibold tracking-tight;
+    /* Ensure numbers display left-to-right correctly inside Arabic text */
+    unicode-bidi: isolate;
+    direction: ltr;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(28, 35, 46, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 169, 97, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-panel-premium {
+    background: rgba(28, 35, 46, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(201, 169, 97, 0.05);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--color-gold-primary) 0%, var(--color-gold-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(201, 169, 97, 0.3) 50%, transparent 100%);
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white text-black;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .text-text-primary,
+  .text-text-secondary {
+    color: #111 !important;
+  }
+
+  .text-gold-primary,
+  .font-mono-num {
+    color: #7A5C2E !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .glass-panel,
+  .glass-panel-premium {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    color: black !important;
+  }
+
+  .text-text-secondary {
+    color: #555 !important;
+  }
+
+  .text-gradient-gold {
+    background: none;
+    -webkit-text-fill-color: black;
+    color: black;
+  }
+
+  .print-page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure header/footer repeats natively or hide dashboard chrome */
+}
