@@ -42,7 +42,11 @@ export const RawMaterialTimeline: React.FC = () => {
       </div>
 
       <GlassCard className="p-0 overflow-hidden relative">
-        <div className="hidden md:block overflow-x-auto p-6 custom-scrollbar pb-8">
+        {/* Gradient overlays for scroll hint */}
+        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-bg-elevated to-transparent pointer-events-none z-20"></div>
+        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-bg-elevated to-transparent pointer-events-none z-20"></div>
+        
+        <div className="hidden md:block overflow-x-auto p-6 custom-scrollbar pb-8 relative">
           <div className="relative">
             {/* Horizontal Line */}
             <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2 border-dashed"></div>
@@ -55,9 +59,9 @@ export const RawMaterialTimeline: React.FC = () => {
                 return (
                   <div key={product.id} className="relative flex-none w-64 snap-start">
                     {/* Node on line */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-bg-base border-2 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-bg-base border-2 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)]"
                          style={{ borderColor: hasTrend ? 'var(--color-accent-warning)' : 'var(--color-gold-primary)' }}>
-                      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: hasTrend ? 'var(--color-accent-warning)' : 'var(--color-gold-primary)' }}></div>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: hasTrend ? 'var(--color-accent-warning)' : 'var(--color-gold-primary)' }}></div>
                     </div>
                     
                     {/* Content Top */}

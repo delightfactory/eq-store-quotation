@@ -4,7 +4,7 @@ import { GoldDivider } from './Shared';
 
 export const FooterBranding: React.FC = () => {
   return (
-    <footer className="mt-20 pb-12 pt-8 animate-fade-in-up" style={{ animationDelay: '450ms' }}>
+    <footer className="mt-12 md:mt-20 pb-12 pt-8 animate-fade-in-up" style={{ animationDelay: '450ms' }}>
       <GoldDivider />
       
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-8">
@@ -27,7 +27,7 @@ export const FooterBranding: React.FC = () => {
             Digital Experience By
           </span>
           <div className="flex items-center gap-3">
-            <img src="/techedge-logo.png" alt={digitalExperience.by} className="h-6 w-6 object-contain rounded-md" />
+            <img src="/techedge-logo.png" alt={digitalExperience.by} className="h-8 w-8 object-contain rounded-md" />
             <span className="text-sm font-bold font-en text-white tracking-wide">
               {digitalExperience.by}
             </span>

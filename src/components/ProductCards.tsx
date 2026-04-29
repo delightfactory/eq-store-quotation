@@ -62,7 +62,7 @@ const ProductCard: React.FC<{ product: typeof products[0], index: number }> = ({
             aria-selected={activeTab === 'role'}
             aria-controls={`panel-role-${product.id}`}
             id={`tab-role-${product.id}`}
-            className={`flex-1 pb-2 text-xs font-semibold transition-colors border-b-2 focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-1 focus-visible:ring-offset-bg-base outline-none rounded-t-sm ${activeTab === 'role' ? 'border-gold-primary text-gold-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
+            className={`flex-1 py-2 min-h-[40px] text-xs font-semibold transition-colors border-b-2 focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-1 focus-visible:ring-offset-bg-base outline-none rounded-t-sm ${activeTab === 'role' ? 'border-gold-primary text-gold-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
             onClick={() => setActiveTab('role')}
           >
             الدور التجاري
@@ -72,7 +72,7 @@ const ProductCard: React.FC<{ product: typeof products[0], index: number }> = ({
             aria-selected={activeTab === 'strengths'}
             aria-controls={`panel-strengths-${product.id}`}
             id={`tab-strengths-${product.id}`}
-            className={`flex-1 pb-2 text-xs font-semibold transition-colors border-b-2 focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-1 focus-visible:ring-offset-bg-base outline-none rounded-t-sm ${activeTab === 'strengths' ? 'border-gold-primary text-gold-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
+            className={`flex-1 py-2 min-h-[40px] text-xs font-semibold transition-colors border-b-2 focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-1 focus-visible:ring-offset-bg-base outline-none rounded-t-sm ${activeTab === 'strengths' ? 'border-gold-primary text-gold-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
             onClick={() => setActiveTab('strengths')}
           >
             نقاط القوة
@@ -82,14 +82,14 @@ const ProductCard: React.FC<{ product: typeof products[0], index: number }> = ({
             aria-selected={activeTab === 'reason'}
             aria-controls={`panel-reason-${product.id}`}
             id={`tab-reason-${product.id}`}
-            className={`flex-1 pb-2 text-xs font-semibold transition-colors border-b-2 focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-1 focus-visible:ring-offset-bg-base outline-none rounded-t-sm ${activeTab === 'reason' ? 'border-gold-primary text-gold-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
+            className={`flex-1 py-2 min-h-[40px] text-xs font-semibold transition-colors border-b-2 focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-1 focus-visible:ring-offset-bg-base outline-none rounded-t-sm ${activeTab === 'reason' ? 'border-gold-primary text-gold-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
             onClick={() => setActiveTab('reason')}
           >
             سبب الإدراج
           </button>
         </div>
 
-        <div className="min-h-[140px] text-sm text-text-secondary leading-relaxed p-3 bg-white/[0.02] rounded-lg border border-white/5 transition-all duration-300 ease-in-out relative">
+        <div className="min-h-[160px] text-sm text-text-secondary leading-relaxed p-3 bg-white/[0.02] rounded-lg border border-white/5 transition-all duration-300 ease-in-out relative overflow-hidden">
           {activeTab === 'role' && (
             <div role="tabpanel" id={`panel-role-${product.id}`} aria-labelledby={`tab-role-${product.id}`} className="animate-fade-in-up" tabIndex={0}>
               <p>{product.strategicRole}</p>
@@ -136,7 +136,7 @@ export const ProductCards: React.FC = () => {
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2" role="group" aria-label="تصنيفات المنتجات">
           <button 
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-gold-primary outline-none ${filter === null ? 'bg-gold-primary/20 text-gold-primary border border-gold-primary/30' : 'bg-white/5 text-text-secondary border border-white/10 hover:bg-white/10'}`}
+            className={`px-4 py-2 min-h-[40px] rounded-full text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-gold-primary outline-none ${filter === null ? 'bg-gold-primary/20 text-gold-primary border border-gold-primary/30' : 'bg-white/5 text-text-secondary border border-white/10 hover:bg-white/10'}`}
             onClick={() => setFilter(null)}
             aria-pressed={filter === null}
           >
@@ -148,7 +148,7 @@ export const ProductCards: React.FC = () => {
             return (
               <button 
                 key={id}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-gold-primary outline-none ${filter === id ? 'bg-gold-primary/20 text-gold-primary border border-gold-primary/30' : 'bg-white/5 text-text-secondary border border-white/10 hover:bg-white/10'}`}
+                className={`px-4 py-2 min-h-[40px] rounded-full text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-gold-primary outline-none ${filter === id ? 'bg-gold-primary/20 text-gold-primary border border-gold-primary/30' : 'bg-white/5 text-text-secondary border border-white/10 hover:bg-white/10'}`}
                 onClick={() => setFilter(id)}
                 aria-pressed={filter === id}
               >

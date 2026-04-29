@@ -50,7 +50,7 @@ export const CommercialTerms: React.FC = () => {
       </h3>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 flex flex-col gap-6">
+        <div className="order-last lg:order-first lg:col-span-2 flex flex-col gap-6">
           
           {/* Executive Summary Strip */}
           <div className="flex flex-wrap gap-4 p-4 bg-white/5 border border-white/10 rounded-xl">
@@ -77,7 +77,7 @@ export const CommercialTerms: React.FC = () => {
           </GlassCard>
         </div>
 
-        <div className="lg:col-span-1 space-y-4">
+        <div className="order-first lg:order-last lg:col-span-1 space-y-4">
           <h4 className="font-bold text-text-primary mb-4 border-b border-white/10 pb-2">الخطوات التالية</h4>
           
           <GlassCard className="p-5 flex gap-4 items-start hover:bg-white/[0.02] transition-colors cursor-default border-l-2 border-l-transparent hover:border-l-gold-primary">

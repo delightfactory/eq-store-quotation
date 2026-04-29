@@ -9,10 +9,10 @@ export const StickyTopBar: React.FC = () => {
 
   return (
     <div className="sticky top-0 z-50 glass-panel border-b border-white/5 rounded-none px-4 py-3 sm:px-6 shadow-xl no-print animate-fade-in-up">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
         
         {/* Left side (Issuer/Tech Edge on desktop) */}
-        <div className="hidden md:flex flex-col">
+        <div className="hidden lg:flex flex-col">
           <span className="text-[10px] text-text-secondary uppercase tracking-widest font-en">Powered by Tech Edge</span>
           <span className="text-sm font-bold text-text-primary">Delight Factory</span>
         </div>
@@ -29,8 +29,8 @@ export const StickyTopBar: React.FC = () => {
         {/* Right side (Totals & Print) */}
         <div className="flex flex-1 md:flex-none justify-between md:justify-end items-center w-full md:w-auto gap-4">
           <div className="flex flex-col items-end">
-            <span className="text-[10px] text-text-secondary bg-white/5 px-2 py-0.5 rounded-sm border border-white/10 mb-1">الإصدار {quotationMeta.version} - معتمد</span>
-            <span className="text-lg font-mono-num text-gradient-gold">
+            <span className="hidden md:inline-flex text-[10px] text-text-secondary bg-white/5 px-2 py-0.5 rounded-sm border border-white/10 mb-1">الإصدار {quotationMeta.version} - معتمد</span>
+            <span className="text-base md:text-lg font-mono-num text-gradient-gold">
               {formatCurrency(selectors.totalQuotationValue())} <span className="text-xs text-gold-primary">ج.م</span>
             </span>
           </div>

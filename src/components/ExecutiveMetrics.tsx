@@ -7,16 +7,18 @@ interface KpiCardProps {
   value: string | number;
   subValue?: string;
   isCurrency?: boolean;
+  className?: string;
+  valueClassName?: string;
 }
 
-const KpiCard: React.FC<KpiCardProps> = ({ label, value, subValue, isCurrency = false }) => (
-  <GlassCard className="flex flex-col p-4 sm:p-5">
+const KpiCard: React.FC<KpiCardProps> = ({ label, value, subValue, isCurrency = false, className = '', valueClassName = '' }) => (
+  <GlassCard className={`flex flex-col p-4 sm:p-5 ${className}`}>
     <span className="text-xs sm:text-sm text-text-secondary mb-2 leading-tight">{label}</span>
-    <div className="flex items-baseline gap-1">
+    <div className="flex items-baseline gap-1 relative z-10">
       {typeof value === 'number' ? (
-        <AnimatedNumber value={value} isCurrency={isCurrency} className="text-xl sm:text-2xl font-bold text-text-primary" />
+        <AnimatedNumber value={value} isCurrency={isCurrency} className={`text-xl sm:text-2xl font-bold text-text-primary ${valueClassName}`} />
       ) : (
-        <span className={`text-lg sm:text-xl font-bold text-text-primary break-words leading-tight ${typeof value === 'string' && value.match(/^[0-9]+/) ? 'font-mono-num' : ''}`}>{value}</span>
+        <span className={`text-lg sm:text-xl font-bold text-text-primary break-words leading-tight ${typeof value === 'string' && value.match(/^[0-9]+/) ? 'font-mono-num' : ''} ${valueClassName}`}>{value}</span>
       )}
       {subValue && <span className="text-xs text-text-secondary ml-1">{subValue}</span>}
     </div>
@@ -40,6 +42,8 @@ export const ExecutiveMetrics: React.FC = () => {
           value={selectors.totalQuotationValue()} 
           subValue="ج.م" 
           isCurrency={true} 
+          className="col-span-2 md:col-span-1 lg:col-span-1"
+          valueClassName="text-3xl sm:text-4xl text-gradient-gold"
         />
         <KpiCard 
           label="إجمالي الكميات" 

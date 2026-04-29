@@ -6,14 +6,14 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   --color-bg-base: #0A0E13;
-  --color-bg-elevated: #141921;
+  --color-bg-elevated: #111720;
   --color-bg-overlay: #1C232E;
 
   --color-gold-primary: #C9A961;
   --color-gold-secondary: #8B6F3D;
 
   --color-text-primary: #E8E6E1;
-  --color-text-secondary: #8A8B8E;
+  --color-text-secondary: #9A9B9E;
 
   --color-accent-positive: #6B8E6F;
   --color-accent-warning: #C9924A;
@@ -52,7 +52,7 @@
     background: rgba(28, 35, 46, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(201, 169, 97, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
 
@@ -105,6 +105,11 @@
 
 /* Print styles */
 @media print {
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+
   body {
     @apply bg-white text-black;
     print-color-adjust: exact;

@@ -30,7 +30,7 @@ export const ProductionTracker: React.FC = () => {
 
       <GlassCard className="p-6">
         {/* Top Controls & Progress */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 lg:mb-10">
           <div className="w-full md:w-1/3">
             <label htmlFor="product-select" className="block text-xs text-text-secondary mb-2">Select Product Track</label>
             <select 
@@ -62,9 +62,9 @@ export const ProductionTracker: React.FC = () => {
         {/* Steps */}
         <div className="relative">
           {/* Vertical line for mobile, horizontal for desktop */}
-          <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-white/5 md:hidden"></div>
+          <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-white/20 md:hidden"></div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 gap-6 md:gap-4 relative z-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-4 relative z-10">
             {stages.map((stage, idx) => {
               const isCompleted = stage.status === 'completed';
               const isInProgress = stage.status === 'in-progress';
