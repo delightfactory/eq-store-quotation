@@ -6,7 +6,7 @@ export const ProductionTracker: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState(products[0].id);
 
   const getProductStages = (productId: string) => {
-    return productionStages.map(s => ({ ...s, status: 'pending', date: 'TBD' }));
+    return productionStages.map(s => ({ ...s, status: 'pending', date: 'لم يُحدد بعد' }));
   };
 
   const stages = getProductStages(selectedProductId);
