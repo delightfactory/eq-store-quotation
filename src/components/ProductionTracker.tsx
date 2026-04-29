@@ -5,11 +5,11 @@ import { productionStages, products } from '../data/quotationData';
 export const ProductionTracker: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState(products[0].id);
 
-  const getProductStages = (productId: string) => {
+  const getProductStages = () => {
     return productionStages.map(s => ({ ...s, status: 'pending', date: 'لم يُحدد بعد' }));
   };
 
-  const stages = getProductStages(selectedProductId);
+  const stages = getProductStages();
   const completedCount = stages.filter(s => s.status === 'completed').length;
   const inProgressCount = stages.filter(s => s.status === 'in-progress').length;
   const progressPercent = ((completedCount + (inProgressCount * 0.5)) / stages.length) * 100;
