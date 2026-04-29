@@ -5,17 +5,8 @@ import { productionStages, products } from '../data/quotationData';
 export const ProductionTracker: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState(products[0].id);
 
-  const demoActiveProductId = products[0]?.id;
-
   const getProductStages = (productId: string) => {
-    if (productId === demoActiveProductId) {
-      return productionStages.map((s, i) => ({
-        ...s,
-        status: i < 4 ? 'completed' : i === 4 ? 'in-progress' : 'pending',
-        date: i < 4 ? '2026-05-10' : i === 4 ? 'In Progress' : `2026-05-${11 + i}`
-      }));
-    }
-    return productionStages.map((s, i) => ({ ...s, status: 'pending', date: `2026-05-${10 + i}` }));
+    return productionStages.map(s => ({ ...s, status: 'pending', date: 'TBD' }));
   };
 
   const stages = getProductStages(selectedProductId);
